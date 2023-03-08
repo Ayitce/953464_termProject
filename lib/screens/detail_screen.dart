@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:term_project/models/travelsInfo.dart';
+import 'package:term_project/screens/detail_edit.dart';
 
-
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final _pageController = PageController();
   final TravelsInfo dest;
 
@@ -14,6 +14,20 @@ class DetailsScreen extends StatelessWidget {
     Key? key,
     required this.dest,
   }) : super(key: key);
+
+  @override
+  State<DetailsScreen> createState() => _detailsScreenState(dest: this.dest);
+}
+
+class _detailsScreenState extends State<DetailsScreen> {
+  final _pageController = PageController();
+  final TravelsInfo dest;
+
+  _detailsScreenState({
+    Key? key,
+    required this.dest,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +44,7 @@ class DetailsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                          dest.images[index]),
+                      image: CachedNetworkImageProvider(dest.images[index]),
                     ),
                   ),
                 ),
@@ -58,8 +71,8 @@ class DetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(9.6),
                           color: Color(0x10000000),
                         ),
-                        child:
-                            SvgPicture.asset('assets/icons/icon_left_arrow.svg'),
+                        child: SvgPicture.asset(
+                            'assets/icons/icon_left_arrow.svg'),
                       ),
                     ),
                   ],
@@ -72,69 +85,81 @@ class DetailsScreen extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: Container(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.5,
+                    minHeight: MediaQuery.of(context).size.height * 0.5,
                     maxHeight: MediaQuery.of(context).size.height * 0.5),
                 padding: EdgeInsets.only(left: 28.8, top: 40, right: 28.8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SmoothPageIndicator(
-                      controller: _pageController,
-                      count: dest.images.length,
-                      effect: ExpandingDotsEffect(
-                          activeDotColor: Color(0xFFFFFFFF),
-                          dotColor: Color(0xFFababab),
-                          dotHeight: 4.8,
-                          dotWidth: 6,
-                          spacing: 4.8),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Text(
-                        dest.tagLine,
-                        maxLines: 3,
-                        overflow: TextOverflow.fade,
-                        style: GoogleFonts.playfairDisplay(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Text(
-                        dest.description,
-                        maxLines: 8,
-                        overflow: TextOverflow.fade,
-                        style: GoogleFonts.lato(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child:ElevatedButton(
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SmoothPageIndicator(
+                          controller: _pageController,
+                          count: dest.images.length,
+                          effect: ExpandingDotsEffect(
+                              activeDotColor: Color(0xFFFFFFFF),
+                              dotColor: Color(0xFFababab),
+                              dotHeight: 4.8,
+                              dotWidth: 6,
+                              spacing: 4.8),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10),
                           child: Text(
-                            "Edit",
-                            style: TextStyle(fontSize: 16)
-                            ),
-                          style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 2, 96, 49)),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Color.fromARGB(255, 2, 96, 49))
-                              )
-                            )
+                            dest.tagLine,
+                            maxLines: 3,
+                            overflow: TextOverflow.fade,
+                            style: GoogleFonts.playfairDisplay(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
                           ),
-                          onPressed: () => null
-                        )
-                      )
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            dest.description,
+                            maxLines: 8,
+                            overflow: TextOverflow.fade,
+                            style: GoogleFonts.lato(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                            alignment: Alignment.centerRight,
+                            child: ElevatedButton(
+                                child: Text("Edit", style: TextStyle(fontSize: 16)),
+                                style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color.fromARGB(255, 2, 96, 49)),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color:
+                                                    Color.fromARGB(255, 2, 96, 49))))),
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetailsEdit(dest: dest)),
+                                    );
+                                  });
+                                }))
+                      ],
+                    ),
                   ],
                 ),
               ),
