@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:term_project/constatns/app_constatns.dart';
 import 'package:term_project/models/travelsInfo.dart';
+import 'package:term_project/screens/detail_screen.dart';
 
 class TravelCard extends StatelessWidget {
   final TravelsInfo dest;
@@ -19,9 +20,7 @@ class TravelCard extends StatelessWidget {
         closedElevation: 0,
         openElevation: 0,
         closedBuilder: (context, action) => buildTravelCard(context),
-        openBuilder: (context, action) => Scaffold(
-          backgroundColor: Colors.green,
-        ),
+        openBuilder: (context, action) => DetailsScreen(dest: dest,),
       ),
     );
   }
