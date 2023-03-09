@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:term_project/api/notification_api.dart';
 import 'package:term_project/models/travelsInfo.dart';
 import 'package:term_project/screens/detail_edit.dart';
 
@@ -133,21 +134,21 @@ class _detailsScreenState extends State<DetailsScreen> {
                         Container(
                             alignment: Alignment.centerRight,
                             child: ElevatedButton(
-                                child: Text("Edit", style: TextStyle(fontSize: 16)),
+                                child: Text("Edit",
+                                    style: TextStyle(fontSize: 16)),
                                 style: ButtonStyle(
                                     foregroundColor: MaterialStateProperty.all<Color>(
                                         Colors.white),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Color.fromARGB(255, 2, 96, 49)),
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(18.0),
                                             side: BorderSide(
-                                                color:
-                                                    Color.fromARGB(255, 2, 96, 49))))),
+                                                color: Color.fromARGB(
+                                                    255, 2, 96, 49))))),
                                 onPressed: () {
                                   setState(() {
                                     Navigator.push(
@@ -157,7 +158,30 @@ class _detailsScreenState extends State<DetailsScreen> {
                                               DetailsEdit(dest: dest)),
                                     );
                                   });
-                                }))
+                                })),
+                        Container(
+                            alignment: Alignment.centerRight,
+                            child: ElevatedButton(
+                                child: Text("noti",
+                                    style: TextStyle(fontSize: 16)),
+                                style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color.fromARGB(255, 2, 96, 49)),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 2, 96, 49))))),
+                                onPressed: () => NotificationApi.showNotification(
+                                      title: 'fegb',
+                                      body: 'dwvfbthyr',
+                                      payload: 'sdw.few',
+                                    ))),
                       ],
                     ),
                   ],
