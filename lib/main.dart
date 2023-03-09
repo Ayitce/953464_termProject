@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:term_project/screens/home_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Travel Information App',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity
-      ),
+      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
       home: const HomeScreen(),
     );
   }
 }
-

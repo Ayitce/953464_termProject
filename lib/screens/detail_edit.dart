@@ -4,6 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:term_project/models/travelsInfo.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class DetailsEdit extends StatelessWidget {
   final _pageController = PageController();
@@ -13,8 +17,32 @@ class DetailsEdit extends StatelessWidget {
     required this.dest,
   }) : super(key: key);
 
+  sendNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails('10000',
+        'FLUTTER_NOTIFICATION_CHANNEL', 'FLUTTER_NOTIFICATION_CHANNEL_DETAIL',
+        importance: Importance.max, priority: Priority.high);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(111, 'Hello, benznest.',
+        'This is a your notifications. ', platformChannelSpecifics);
+  }
+
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    var initializationSettingsAndroid =
+        const AndroidInitializationSettings('ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
     TextEditingController _controller =
         TextEditingController(text: dest.description);
 
@@ -134,8 +162,9 @@ class DetailsEdit extends StatelessWidget {
                                 child: Text("Cancel",
                                     style: TextStyle(fontSize: 16)),
                                 style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all<Color>(
-                                        Color.fromARGB(255, 2, 96, 49)),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color.fromARGB(255, 2, 96, 49)),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
                                             Colors.white),
@@ -144,8 +173,8 @@ class DetailsEdit extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(18.0),
                                             side: BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 2, 96, 49))))),
+                                                color:
+                                                    Color.fromARGB(255, 2, 96, 49))))),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
@@ -166,6 +195,7 @@ class DetailsEdit extends StatelessWidget {
                                                 color: Color.fromARGB(
                                                     255, 2, 96, 49))))),
                                 onPressed: () {
+                                  sendNotification();
                                   Navigator.pop(context);
                                   dest.setDescription(_controller.text);
                                 }),
