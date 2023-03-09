@@ -27,8 +27,8 @@ class DetailsEdit extends StatelessWidget {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    await flutterLocalNotificationsPlugin.show(111, 'Hello, benznest.',
-        'This is a your notifications. ', platformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(111, 'Notification, New Detail Update.',
+        'New detail has been update ,please cheack ', platformChannelSpecifics);
   }
 
   @override
