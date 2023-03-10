@@ -112,7 +112,7 @@ class _detailsScreenState extends State<DetailsScreen> {
                             style: GoogleFonts.playfairDisplay(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white),
+                                color: Colors.white,backgroundColor: Colors.black.withOpacity(0.5)),
                           ),
                         ),
                         Padding(
@@ -124,7 +124,7 @@ class _detailsScreenState extends State<DetailsScreen> {
                             style: GoogleFonts.lato(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white),
+                                color: Colors.white,backgroundColor: Colors.black.withOpacity(0.7)),
                           ),
                         ),
                         SizedBox(
