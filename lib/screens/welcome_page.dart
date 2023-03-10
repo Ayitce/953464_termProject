@@ -68,14 +68,21 @@ class WelcomePage extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => const HomeScreen()));
                                 })
-                  )
+                  ),
+                  
+                
                 ],
               ),
+            
             ),
-         
+           Container(
+                    child: Image.network('https://cdn.pixabay.com/photo/2015/04/27/11/48/sign-741813_960_720.jpg'),
+                  )
           ],
         ),
+        
       ),
+      
     );
   }
 }
