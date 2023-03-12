@@ -127,15 +127,18 @@ class DetailsEdit extends StatelessWidget {
                         style: GoogleFonts.playfairDisplay(
                             fontSize: 28,
                             fontWeight: FontWeight.w700,
-                            color: Colors.white),
+                            color: Colors.white,backgroundColor: Colors.black.withOpacity(0.5)),
                       ),
                     ),
-                    TextField(
-                      style: TextStyle(color: Colors.white),
-                      maxLines: null,
-                      controller: _controller, // <-- SEE HERE
-                      decoration:
-                          InputDecoration(labelText: 'Edit description'),
+                    Container(
+                      decoration: BoxDecoration(color:Colors.black.withOpacity(0.5)),
+                      child: TextField(
+                        style: TextStyle(color: Colors.white),
+                        maxLines: null,
+                        controller: _controller, // <-- SEE HERE
+                        decoration:
+                            InputDecoration(labelText: 'Edit description', labelStyle: TextStyle(backgroundColor: Colors.black.withOpacity(0.5), color: Colors.white)),
+                      ),
                     ),
 
                     // Padding(
